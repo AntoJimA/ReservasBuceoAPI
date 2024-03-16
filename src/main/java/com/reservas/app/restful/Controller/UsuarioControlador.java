@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.reservas.app.restful.Model.Usuario;
 import com.reservas.app.restful.Repository.UserRepository;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +25,32 @@ public class UsuarioControlador {
     public String hola() {
         return "Hola Mundo";
     }
+
+
+    @GetMapping("/crearUsuario")
+    public void crearUsuario(@RequestParam Usuario user) {
+        userRepository.save(user);
+    }
+
+    @GetMapping("/eliminarUsuario")
+    public void eliminarPorID(@RequestParam int id) {
+        userRepository.deleteById(id);
+    }
+
+    @GetMapping("/actualizarUsuario")
+    public void actualizarUsuario(@RequestParam Usuario user) {
+        userRepository.update(user);
+    }
+
+    @GetMapping("/buscarUsuario{id}")
+    public Usuario buscarUsuario(@RequestParam int id) {
+        return userRepository.findById(id);
+    }
+
+    @GetMapping("/listarUsuarios")
+    public void listarUsuarios() {
+        userRepository.usuarios();
+    }
+    
     
 }
